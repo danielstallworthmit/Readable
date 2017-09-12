@@ -1,3 +1,4 @@
+import { uuidv4 } from '../urils/helpers';
 const api = 'http://localhost:3001/'
 
 let token = localStorage.token
@@ -64,7 +65,11 @@ export const fetchPost = ( id ) => {
     }
 }
 
-export const createPost = ( post ) => {
+export const createPost = ( post, callback ) => {
+    post.id = uuidv4();
+    post.timestamp = Date.now();
+    // post.voteScore = 0;
+    // post.deleted = false;
     const postreq = fetch(`${api}/posts`, {
             method: 'POST',
             headers: {
@@ -73,6 +78,7 @@ export const createPost = ( post ) => {
             },
             body: JSON.stringify(post)
         }).then(res => res.json())
+            .then(() => callback());
     return {
         type: CREATE_POST,
         postreq
@@ -80,7 +86,7 @@ export const createPost = ( post ) => {
     }
 }
 
-export const updatePost = ( post ) => {
+export const updatePost = ( post, callback ) => {
     const postreq = fetch(`${api}/posts/${post.id}`, {
             method: 'PUT',
             headers: {
@@ -89,6 +95,7 @@ export const updatePost = ( post ) => {
             },
             body: JSON.stringify(post)
         }).then(res => res.json())
+            .then(() => callback())
     return {
         type: UPDATE_POST,
         postreq
@@ -96,10 +103,11 @@ export const updatePost = ( post ) => {
     }
 }
 
-export const removePost = ( id ) => {
+export const removePost = ( id, callback ) => {
     const postreq = fetch(`${api}/posts/${id}`, { method: 'DELETE', headers })
         .then(res => res.json())
         .then(data => data.post)
+        .then(() => callback())
     return {
         type: REMOVE_POST,
         id
@@ -135,11 +143,13 @@ export const fetchComments = ( postid ) => {
         .then(data => data.comments)
     return {
         type: FETCH_COMMENTS,
-        comments
+        comments, postid
     }
 }
 
-export const createComment = ( comment ) => {
+export const createComment = ( comment, callback ) => {
+    comment.id = uuidv4();
+    comment.timestamp = Date.now();
     const commentreq = fetch(`${api}/comments`, {
             headers: {
                 method: 'POST',
@@ -147,6 +157,7 @@ export const createComment = ( comment ) => {
             },
             body: JSON.stringify(comment)
         }).then(res => res.json())
+            .then(() => callback())
     return {
         type: CREATE_COMMENT,
         commentreq
@@ -154,7 +165,7 @@ export const createComment = ( comment ) => {
     }
 }
 
-export const updateComment = ( comment ) => {
+export const updateComment = ( comment, callback ) => {
     const commentreq = fetch(`${api}/comments/${comment.id}`, {
             method: 'PUT',
             headers: {
@@ -163,6 +174,7 @@ export const updateComment = ( comment ) => {
             },
             body: JSON.stringify(comment)
         }).then(res => res.json())
+            .then(() => callback())
     return {
         type: UPDATE_COMMENT,
         commentreq
@@ -170,18 +182,18 @@ export const updateComment = ( comment ) => {
     }
 }
 
-export const removeComment = ( id ) => {
+export const removeComment = ( id, postid ) => {
     const comment = fetch(`${api}/comments/${id}`, { method: 'DELETE', headers })
         .then(res => res.json())
         .then(data => data.comment)
     return {
         type: REMOVE_COMMENT,
-        id
+        id, postid
     }
 }
 
 // Increment/Decrement Comment Action Creators
-export const voteComment = ( comment, option ) => {
+export const voteComment = ( postid, comment, option ) => {
     comment.option = option
     const commentreq = fetch(`${api}/comments/${comment.id}`, {
             method: 'POST',
