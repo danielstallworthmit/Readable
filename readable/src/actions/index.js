@@ -49,20 +49,20 @@ export const fetchPosts = () => {
 export const fetchCategoryPosts = ( category ) => {
     const posts = fetch(`${api}/${category}/posts`, { headers })
         .then(res => res.json())
-        .then(data => data.posts)
+        // .then(data => data.posts)
     return {
         type: FETCH_CATEGORY_POSTS,
-        posts
+        payload: posts
     }
 }
 
 export const fetchPost = ( id ) => {
     const post = fetch(`${api}/posts/${id}`,{ headers })
         .then(res => res.json())
-        .then(data => data.post)
+        // .then(data => data.post)
     return {
         type: FETCH_POST,
-        post
+        payload: post
     }
 }
 
@@ -82,7 +82,7 @@ export const createPost = ( post, callback ) => {
             .then(() => callback());
     return {
         type: CREATE_POST,
-        postreq
+        payload: postreq
         // title, body, author, category
     }
 }
@@ -99,7 +99,7 @@ export const updatePost = ( post, callback ) => {
             .then(() => callback())
     return {
         type: UPDATE_POST,
-        postreq
+        payload: postreq
         // title, body, author, category
     }
 }
@@ -107,11 +107,11 @@ export const updatePost = ( post, callback ) => {
 export const removePost = ( id, callback ) => {
     const postreq = fetch(`${api}/posts/${id}`, { method: 'DELETE', headers })
         .then(res => res.json())
-        .then(data => data.post)
+        // .then(data => data.post)
         .then(() => callback())
     return {
         type: REMOVE_POST,
-        id
+        payload: id
     }
 }
 
@@ -128,7 +128,7 @@ export const votePost = ( post, option ) => {
         }).then(res => res.json())
     return {
         type: VOTE_POST,
-        postreq
+        payload: postreq
         // id, voteScore
     }
 }
@@ -141,10 +141,11 @@ export const votePost = ( post, option ) => {
 export const fetchComments = ( postid ) => {
     const comments = fetch(`${api}/posts/${postid}/comments`, { headers })
         .then(res => res.json())
-        .then(data => data.comments)
+        // .then(data => data.comments)
     return {
         type: FETCH_COMMENTS,
-        comments, postid
+        payload: comments, 
+        postid
     }
 }
 
@@ -161,7 +162,7 @@ export const createComment = ( comment, callback ) => {
             .then(() => callback())
     return {
         type: CREATE_COMMENT,
-        commentreq
+        payload: commentreq
         // body, author
     }
 }
@@ -178,7 +179,7 @@ export const updateComment = ( comment, callback ) => {
             .then(() => callback())
     return {
         type: UPDATE_COMMENT,
-        commentreq
+        payload: commentreq
         // id, body, author
     }
 }
@@ -186,10 +187,11 @@ export const updateComment = ( comment, callback ) => {
 export const removeComment = ( id, postid ) => {
     const comment = fetch(`${api}/comments/${id}`, { method: 'DELETE', headers })
         .then(res => res.json())
-        .then(data => data.comment)
+        // .then(data => data.comment)
     return {
         type: REMOVE_COMMENT,
-        id, postid
+        payload: comment, 
+        postid
     }
 }
 
@@ -206,7 +208,7 @@ export const voteComment = ( postid, comment, option ) => {
         }).then(res => res.json())
     return {
         type: VOTE_COMMENT,
-        commentreq
+        payload: commentreq
     }
 }
 

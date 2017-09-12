@@ -3,19 +3,19 @@ import _ from 'lodash';
 
 export default function( state={}, action ) {
     // console.log(action)
-    const { payload, id, posts, post, postreq, postid, comments, commentreq } = action;
+    const { payload, id, postid } = action;
     // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:
             // console.log(action)
             return _.mapKeys(action.payload, 'id');
         case acts.FETCH_CATEGORY_POSTS:
-            return posts;
+            return _.mapKeys(action.payload, 'id');;
             // return _.pickBy(posts, ( value, key ) => {
             //     return _.isEqual(key['category'], posts.category);
             // });
         case acts.FETCH_POST:
-            return { ...state, [post.id]: post }
+            return { ...state, [payload.id]: payload }
         // case acts.CREATE_POST:
         //     const id = uuidv4()
         //     return { ...state, [postreq.id]: postreq }
@@ -44,7 +44,8 @@ export default function( state={}, action ) {
         //         }
         //     }
         case acts.REMOVE_POST:
-            return _.omit(state, id)
+            // return _.omit(state, payload)
+            return { ...state, [payload]: { ...state[payload], deleted: true } }
             // return {
             //     ...state,
             //     [id]: {
@@ -53,7 +54,7 @@ export default function( state={}, action ) {
             //     }
             // }
         case acts.VOTE_POST:
-            return { ...state, [postreq.id]: postreq }
+            return { ...state, [payload.id]: payload }
             // return {
             //     ...state,
             //     [id]: {
@@ -62,7 +63,7 @@ export default function( state={}, action ) {
             //     }
             // }
         case acts.FETCH_COMMENTS:
-            return { ...state, [postid]: comments }
+            return { ...state, [postid]: { ...state[postid], comments: _.mapKeys(action.payload, 'id') } }
         // case acts.CREATE_COMMENT:
         //     return { ...state, [] }
             // return {
@@ -88,7 +89,7 @@ export default function( state={}, action ) {
         //         }
         //     }
         case acts.REMOVE_COMMENT:
-            return { ...state, [postid]: { ...state[postid], ['comments']: _.map(['comments'], cid => cid != id) } }
+            return { ...state, [postid]: { ...state[postid], comments: { ...state[postid].comments, [payload.id]: payload } } }
             // return {
             //     ...state,
             //     [id]: {
@@ -97,7 +98,7 @@ export default function( state={}, action ) {
             //     }
             // }
         case acts.VOTE_COMMENT:
-            return { ...state, [postid]: { ...state[postid], ['comments']: { ...state[postid]['comments'], [commentreq.id]: commentreq }  } }
+        return { ...state, [postid]: { ...state[postid], comments: { ...state[postid].comments, [payload.id]: payload } } }
             // return {
             //     ...state,
             //     [id]: {
