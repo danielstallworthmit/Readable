@@ -1,5 +1,5 @@
-import { uuidv4 } from '../urils/helpers';
-const api = 'http://localhost:3001/'
+import { uuidv4 } from '../utils/helpers';
+const api = 'http://localhost:3001'
 
 let token = localStorage.token
 
@@ -36,12 +36,13 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 // Post Action Creators
 export const fetchPosts = () => {
+    console.log('fetching posts!')
     const posts = fetch(`${api}/posts`, { headers })
         .then(res => res.json())
-        .then(data => data.posts)
+        // .then(data => data.posts)
     return {
         type: FETCH_POSTS,
-        posts
+        payload: posts
     }
 }
 

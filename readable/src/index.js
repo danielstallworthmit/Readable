@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise';
+// import promiseMiddleware from 'redux-promise-middleware';
 import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -13,13 +14,10 @@ import MainIndex from './components/main_index'
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
+    // <Provider store={createStore(reducers, {}, applyMiddleware(promiseMiddleware()))}>
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
-            <Switch>
-                <Route path='/:category/:post_id' component={Post} />
-                <Route path='/:category' component={MainIndex} />
-                <Route path='/' component={MainIndex} />
-            </Switch>
+            <MainIndex />
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));

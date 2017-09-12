@@ -2,12 +2,15 @@ import * as acts from '../actions';
 import _ from 'lodash';
 
 export default function( state={}, action ) {
-    const { id, posts, post, postreq, postid, comments, commentreq } = action;
+    // console.log(action)
+    const { payload, id, posts, post, postreq, postid, comments, commentreq } = action;
+    // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:
-            return { ...posts };
+            // console.log(action)
+            return _.mapKeys(action.payload, 'id');
         case acts.FETCH_CATEGORY_POSTS:
-            return { ...posts };
+            return posts;
             // return _.pickBy(posts, ( value, key ) => {
             //     return _.isEqual(key['category'], posts.category);
             // });
