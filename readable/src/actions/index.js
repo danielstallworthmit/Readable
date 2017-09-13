@@ -35,10 +35,11 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 
 // Post Action Creators
-export const fetchPosts = () => {
+export const fetchPosts = (callback) => {
     console.log('fetching posts!')
     const posts = fetch(`${api}/posts`, { headers })
         .then(res => res.json())
+        // .then(() => callback())
         // .then(data => data.posts)
     return {
         type: FETCH_POSTS,
@@ -144,8 +145,8 @@ export const fetchComments = ( postid ) => {
         // .then(data => data.comments)
     return {
         type: FETCH_COMMENTS,
-        payload: comments, 
-        postid
+        payload: comments 
+        // postid
     }
 }
 
