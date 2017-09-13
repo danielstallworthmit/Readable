@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export default function( state={}, action ) {
     console.log(action)
-    const { payload, id, postid } = action;
+    const { payload, postid } = action;
     // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:

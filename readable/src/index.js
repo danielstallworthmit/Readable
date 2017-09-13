@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import promise from 'redux-promise';
 // import promiseMiddleware from 'redux-promise-middleware';
 import reducers from './reducers';
+import './style/index.css'
 import registerServiceWorker from './registerServiceWorker';
 
 import Post from './components/post'

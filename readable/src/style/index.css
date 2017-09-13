@@ -2,4 +2,71 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 20px;
+}
+
+.header {
+  font-size: 45px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#mainContent {
+  display: flex;
+  align-content: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.voteCell {
+  text-align: center;
+  padding-right: 15px;
+  display: block;
+  min-width: 30px;
+  max-width: 30px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  float: left;
+  height: 30px;
+  width: 30px;
+}
+
+.categoryList {
+  /* float: left; */
+  min-width: 200px;
+  font-size: 30px;
+}
+
+.postList {
+  /* display: inline-block; */
+  flex-grow: 1;
+  margin: 0;
+}
+
+.categoryList, li {
+  margin: 20px;
+}
+
+.postItem {
+  /* display: inline-block; */
+  display: flex;
+  align-items: center;
+}
+
+.post {
+  display: block;
+  flex-grow: 1;
+  /* width: 660px; */
+}
+
+.votes {
+  display: block;
+  font-weight: bold;
 }
