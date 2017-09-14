@@ -53,30 +53,35 @@ img {
   font-size: 30px;
 }
 
-.postList {
+.entityList {
   /* display: inline-block; */
   flex-grow: 1;
   margin: 0;
-  min-width: 700px;
 }
 
 .categoryList, li {
   margin: 20px;
 }
 
-.postItem {
+.entityItem {
   /* display: inline-block; */
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
 }
 
-.post {
+.details {
   display: block;
   flex-grow: 1;
-  /* width: 660px; */
+  min-width: 300px;
 }
 
 .votes {
   display: block;
   font-weight: bold;
+}
+
+.commentBlock {
+  display: flex;
+  min-width: 500px;
 }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { sortPosts } from '../actions';
 
 import Voter from './voter';
+import CommentList from './comment_list';
 
 class PostList extends React.Component {
     static PropTypes = {
@@ -29,20 +30,26 @@ class PostList extends React.Component {
         const { posts, sortPosts, match } = this.props;
         console.log(posts)
         return (
-            <ul className="postList">
+            <ul className="entityList">
                 <select className="sorter" onClick={this.handleChange} defaultValue="none">
                     <option value="none" disabled>Sort Posts ...</option>
                     <option value="timestamp">By Last Posted</option>
                     <option value="voteScore">By High Score</option>
                 </select>
                 { _.map(posts, post => { return (
-                    <li className="postItem" key={post.id}>
-                        <Voter post={post} />
-                        <div className="post">
+                    <li className="entityItem" key={post.id}>
+                        <Voter type="post" entity={post} />
+                        <div className="details">
                             { match.params.hasOwnProperty("post_id") ?
-                                <h3>
-                                    {post.title}
-                                </h3> :
+                                <div className="postDetail">
+                                    <h3>
+                                        {post.title}
+                                    </h3> 
+                                    <p className="postBody">
+                                        {post.body}
+                                    </p>
+                                </div>
+                                :
                                 <Link to={`/${post.category}/${post.id}`} onClick={this.postRender}>
                                     <h3>
                                         {post.title}
@@ -58,6 +65,11 @@ class PostList extends React.Component {
                                 <p> {_.size(post.comments)} Comments </p>
                             </div>
                         </div>
+                        { match.params.hasOwnProperty("post_id") ?
+                            <CommentList post={post} />
+                            :
+                            null
+                        }
                     </li> ) } )  
                 }
             </ul>

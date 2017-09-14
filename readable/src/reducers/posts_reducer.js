@@ -57,7 +57,7 @@ export default function( state={}, action ) {
             // }
         case acts.VOTE_POST:
             console.log(payload)
-            return { ...state, [payload.id]: payload };
+            return { ...state, [payload.id]: { ...state[payload.id], voteScore: payload.voteScore } };
             // return {
             //     ...state,
             //     [id]: {
@@ -109,7 +109,7 @@ export default function( state={}, action ) {
             //     }
             // }
         case acts.VOTE_COMMENT:
-        return { ...state, [postid]: { ...state[postid], comments: { ...state[postid].comments, [payload.id]: payload } } };
+        return { ...state, [payload.parentId]: { ...state[payload.parentId], comments: { ...state[payload.parentId].comments, [payload.id]: payload } } };
             // return {
             //     ...state,
             //     [id]: {

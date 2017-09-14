@@ -208,7 +208,7 @@ export const removeComment = ( id, postid ) => {
 }
 
 // Increment/Decrement Comment Action Creators
-export const voteComment = ( postid, comment, option ) => {
+export const voteComment = ( comment, option ) => {
     comment.option = option
     const commentreq = fetch(`${api}/comments/${comment.id}`, {
             method: 'POST',
