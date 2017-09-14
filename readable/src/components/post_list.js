@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortPosts } from '../actions';
 
@@ -19,9 +20,13 @@ class PostList extends React.Component {
         }
         event.target.value = "none"
     }
+
+    postRender() {
+        this.props.fetchPost(this.props.match.params.post_id);
+    }
     
     render() {
-        const { posts, sortPosts } = this.props;
+        const { posts, sortPosts, match } = this.props;
         console.log(posts)
         return (
             <ul className="postList">
@@ -34,9 +39,16 @@ class PostList extends React.Component {
                     <li className="postItem" key={post.id}>
                         <Voter post={post} />
                         <div className="post">
-                            <h3>
-                                {post.title}
-                            </h3>
+                            { match.params.hasOwnProperty("post_id") ?
+                                <h3>
+                                    {post.title}
+                                </h3> :
+                                <Link to={`/${post.category}/${post.id}`} onClick={this.postRender}>
+                                    <h3>
+                                        {post.title}
+                                    </h3>
+                                </Link>
+                            }
                             <div>
                                 <p>By <span className="author"> {post.author} </span> on <span> {
                                     new Date(post.timestamp).getMonth() + '/' +
@@ -57,4 +69,4 @@ function mapStateToProps( { posts } ) {
     return { posts };
 }
 
-export default connect(mapStateToProps, { sortPosts })(PostList);
+export default withRouter(connect(mapStateToProps, { sortPosts })(PostList));

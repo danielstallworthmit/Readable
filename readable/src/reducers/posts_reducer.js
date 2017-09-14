@@ -8,14 +8,16 @@ export default function( state={}, action ) {
     switch(action.type) {
         case acts.FETCH_POSTS:
             // console.log(action)
-            return _.mapKeys(action.payload, 'id');
+            return _.mapKeys(payload, 'id');
         case acts.FETCH_CATEGORY_POSTS:
-            return _.mapKeys(action.payload, 'id');
+            return _.mapKeys(payload, 'id');
             // return _.pickBy(posts, ( value, key ) => {
             //     return _.isEqual(key['category'], posts.category);
             // });
         case acts.FETCH_POST:
-            return { ...state, [payload.id]: payload };
+            // console.log(payload)
+            return { [payload.id]: payload }
+            // return _.mapKeys(payload, 'id');
         // case acts.CREATE_POST:
         //     const id = uuidv4()
         //     return { ...state, [postreq.id]: postreq }

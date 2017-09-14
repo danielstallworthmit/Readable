@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { fetchPosts, fetchComments, fetchCategoryPosts } from '../actions';
+import { fetchPosts, fetchComments, fetchCategoryPosts, fetchPost } from '../actions';
 import _ from 'lodash';
 
 import Header from './header';
@@ -9,8 +9,10 @@ import Categories from './category_list';
 import PostList from './post_list';
 
 class MainIndex extends React.Component {
-    componentWillMount() {
-        if (this.props.match.params.hasOwnProperty("category")) {
+    componentDidMount() {
+        if (this.props.match.params.hasOwnProperty("post_id")) {
+            this.props.fetchPost(this.props.match.params.post_id)
+        } else if (this.props.match.params.hasOwnProperty("category")) {
             this.props.fetchCategoryPosts(this.props.match.params.category)
         } else {
             this.props.fetchPosts()
@@ -49,4 +51,4 @@ function mapStateToProps( { posts } ) {
     return { posts };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchPosts, fetchComments, fetchCategoryPosts })(MainIndex));
+export default withRouter(connect(mapStateToProps, { fetchPosts, fetchComments, fetchCategoryPosts, fetchPost })(MainIndex));
