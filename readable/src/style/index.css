@@ -5,6 +5,11 @@ body {
   font-size: 20px;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .header {
   font-size: 45px;
   text-align: center;
@@ -36,6 +41,10 @@ img {
   float: left;
   height: 30px;
   width: 30px;
+}
+
+.author {
+  font-weight: bold;
 }
 
 .categoryList {

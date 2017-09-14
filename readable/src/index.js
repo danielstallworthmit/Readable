@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import promise from 'redux-promise';
 // import promiseMiddleware from 'redux-promise-middleware';
 import reducers from './reducers';
@@ -18,7 +18,14 @@ ReactDOM.render(
     // <Provider store={createStore(reducers, {}, applyMiddleware(promiseMiddleware()))}>
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
-            <MainIndex />
+            <Switch>
+                <Route path='/:category' render={() => (
+                    <MainIndex />
+                )} />
+                <Route exact path='/' render={() => (
+                    <MainIndex />
+                )} />
+            </Switch>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));

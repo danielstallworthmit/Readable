@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export default function( state={}, action ) {
     console.log(action)
-    const { payload, postid } = action;
+    const { payload, postid, posts, sorter } = action;
     // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:
@@ -54,6 +54,7 @@ export default function( state={}, action ) {
             //     }
             // }
         case acts.VOTE_POST:
+            console.log(payload)
             return { ...state, [payload.id]: payload };
             // return {
             //     ...state,
@@ -62,6 +63,9 @@ export default function( state={}, action ) {
             //         voteScore: voteScore + 1
             //     }
             // }
+        case acts.SORT_POSTS:
+            console.log(state)
+            return _.mapKeys(_.sortBy(state, sorter).reverse(),'id');
         case acts.FETCH_COMMENTS:
             console.log(payload)
             if ( payload.length > 0 ) {

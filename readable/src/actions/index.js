@@ -21,6 +21,9 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 // Increment and decrement post score through option variable
 export const VOTE_POST = 'VOTE_POST'
+// Sort posts by date or score
+export const SORT_POSTS = 'SORT_POSTS'
+export const SORT_POSTS_SCORE = 'SORT_POSTS_SCORE'
 
 // COMMENTS
 // Fetch, create, update, remove comments
@@ -116,7 +119,7 @@ export const removePost = ( id, callback ) => {
     }
 }
 
-// Increment/Decrement Post Action Creators
+// Increment/Decrement Vote Post Action Creators
 export const votePost = ( post, option ) => {
     post.option = option
     const postreq = fetch(`${api}/posts/${post.id}`,{
@@ -131,6 +134,14 @@ export const votePost = ( post, option ) => {
         type: VOTE_POST,
         payload: postreq
         // id, voteScore
+    }
+}
+
+// Sort Posts
+export const sortPosts = (sorter) => {
+    return {
+        type: SORT_POSTS,
+        sorter
     }
 }
 
