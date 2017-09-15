@@ -36,6 +36,9 @@ class PostList extends React.Component {
                     <option value="timestamp">By Last Posted</option>
                     <option value="voteScore">By High Score</option>
                 </select>
+                <Link to={`/posts/new`}>
+                    <button id="addButton">Add a Post!</button>
+                </Link>
                 { _.map(posts, post => { return (
                     <li className="entityItem" key={post.id}>
                         <Voter type="post" entity={post} />

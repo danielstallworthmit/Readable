@@ -10,6 +10,13 @@ a {
   text-decoration: none;
 }
 
+#addButton {
+  background-color: lightgreen;
+  border: none;
+  margin-left: 20px;
+  padding: 5px;
+}
+
 .header {
   font-size: 45px;
   text-align: center;

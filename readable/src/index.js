@@ -9,7 +9,7 @@ import reducers from './reducers';
 import './style/index.css'
 import registerServiceWorker from './registerServiceWorker';
 
-// import Post from './components/post'
+import PostNew from './components/post_new'
 import MainIndex from './components/main_index'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -19,6 +19,9 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <Switch>
+                <Route path='/posts/new' render={() => (
+                    <PostNew />
+                )} />
                 <Route path='/:category/:post_id' render={() => (
                     <MainIndex />
                 )} />
