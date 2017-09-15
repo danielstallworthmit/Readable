@@ -11,16 +11,16 @@ class EditDelete extends React.Component {
     }
 
     deleteHandler() {
-        this.props.removePost(this.props.post.id, () => {
-            this.props.history.push('/');
-        })
+        console.log(this.props)
+        this.props.removePost(this.props.post)
+        this.props.history.push('/');
     }
     render() {
         // const { post } = this.props;
         return (
             <div className="editDeleteButtons">
                 <button className="addButton" onClick={this.editHandler.bind(this)}>Edit</button>
-                <button className="deleteButton" onClick={this.deleteHandler}>Delete</button>
+                <button className="deleteButton" onClick={this.deleteHandler.bind(this)}>Delete</button>
             </div>
         )
     }

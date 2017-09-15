@@ -4,7 +4,7 @@ import _ from 'lodash';
 export default function( state={}, action ) {
     console.log(action)
     const { payload, postid, posts, sorter } = action;
-    const filterDeleted = (req) => _.pickBy( req, (value, key) => !(key.deleted));
+    const filterDeleted = (req) => _.pickBy( req, (value, key) => !(value.deleted) );
     // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:

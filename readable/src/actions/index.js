@@ -116,14 +116,14 @@ export const updatePost = ( post, callback ) => {
     }
 }
 
-export const removePost = ( id, callback ) => {
-    const postreq = fetch(`${api}/posts/${id}`, { method: 'DELETE', headers })
+export const removePost = ( post ) => {
+    const postreq = fetch(`${api}/posts/${post.id}`, { method: 'DELETE', headers })
         .then(res => res.json())
         // .then(data => data.post)
-        .then(() => callback())
+        // .then(() => callback())
     return {
         type: REMOVE_POST,
-        payload: id
+        payload: post
     }
 }
 
