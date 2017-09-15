@@ -10,6 +10,7 @@ import PostList from './post_list';
 
 class MainIndex extends React.Component {
     componentDidMount() {
+        const cb = () => _.map(this.props.posts, (post) => this.props.fetchComments(post.id) )
         if (this.props.match.params.hasOwnProperty("post_id")) {
             this.props.fetchPost(this.props.match.params.post_id)
         } else if (this.props.match.params.hasOwnProperty("category")) {
