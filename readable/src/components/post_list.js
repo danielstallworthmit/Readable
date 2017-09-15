@@ -44,7 +44,7 @@ class PostList extends React.Component {
                                 <div className="postDetail">
                                     <h3>
                                         {post.title}
-                                    </h3> 
+                                    </h3>
                                     <p className="postBody">
                                         {post.body}
                                     </p>

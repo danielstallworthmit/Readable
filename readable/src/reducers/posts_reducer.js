@@ -4,19 +4,20 @@ import _ from 'lodash';
 export default function( state={}, action ) {
     console.log(action)
     const { payload, postid, posts, sorter } = action;
+    const filterDeleted = (req) => _.pickBy( req, (value, key) => !(key.deleted));
     // console.log(payload.data)
     switch(action.type) {
         case acts.FETCH_POSTS:
             // console.log(action)
-            return _.mapKeys(payload, 'id');
+            // return _.mapKeys(payload, 'id');
         case acts.FETCH_CATEGORY_POSTS:
-            return _.mapKeys(payload, 'id');
+            return filterDeleted( _.mapKeys(payload, 'id'));
             // return _.pickBy(posts, ( value, key ) => {
             //     return _.isEqual(key['category'], posts.category);
             // });
         case acts.FETCH_POST:
             // console.log(payload)
-            return { [payload.id]: payload }
+            return filterDeleted({ [payload.id]: payload });
             // return _.mapKeys(payload, 'id');
         // case acts.CREATE_POST:
         //     const id = uuidv4()
@@ -71,7 +72,7 @@ export default function( state={}, action ) {
         case acts.FETCH_COMMENTS:
             console.log(payload)
             if ( payload.length > 0 ) {
-                return { ...state, [payload[0].parentId]: { ...state[payload[0].parentId], comments: _.mapKeys(payload, 'id') } };
+                return { ...state, [payload[0].parentId]: { ...state[payload[0].parentId], comments: filterDeleted(_.mapKeys(payload, 'id')) } };
             } else {
                 return state
             }

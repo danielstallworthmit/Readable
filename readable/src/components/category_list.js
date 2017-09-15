@@ -12,8 +12,8 @@ class CategoryList extends React.Component {
         return (
             <ul className="categoryList">
                    { this.props.cats.map(cat => (
-                       <Link to={`/${cat}`} onClick={this.categoryRender}>
-                            <li key={cat}>
+                       <Link key={cat} to={`/${cat}`} onClick={this.categoryRender}>
+                            <li>
                                 {cat}
                             </li>
                         </Link>
