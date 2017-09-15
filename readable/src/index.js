@@ -19,7 +19,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <Switch>
-                <Route path='/posts/new' render={() => (
+                <Route exact path='/posts/new' render={() => (
                     <PostNew />
                 )} />
                 <Route path='/:category/:post_id' render={() => (

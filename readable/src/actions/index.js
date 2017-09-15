@@ -18,6 +18,7 @@ export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS'
 export const FETCH_POST = 'FETCH_POST'
 export const CREATE_POST = 'CREATE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const PRE_UPDATE_POST = 'PRE_UPDATE_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 // Increment and decrement post score through option variable
 export const VOTE_POST = 'VOTE_POST'
@@ -88,6 +89,13 @@ export const createPost = ( post, callback ) => {
         type: CREATE_POST,
         payload: postreq
         // title, body, author, category
+    }
+}
+
+export const preUpdatePost = (post) => {
+    return {
+        type: PRE_UPDATE_POST,
+        payload: post
     }
 }
 

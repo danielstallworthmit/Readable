@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions'; 
 
 class PostNew extends React.Component {
+    componentDidMount() {
+        if (this.props.post.hasOwnProperty('update')) {
+            this.props.initialize(this.props.post);
+        }
+    }
     renderField(field) {
         const { meta: { touched, error } } = field;
         return (
@@ -36,25 +41,25 @@ class PostNew extends React.Component {
                     label="Title"
                     type="text"
                     name="title"
-                    component={this.renderField}
+                    component={this.renderField.bind(this)}
                 />
                 <Field 
                     label="Author"
                     type="text"
                     name="author"
-                    component={this.renderField}
+                    component={this.renderField.bind(this)}
                 />
                 <Field 
                     label="Category"
                     type="text"
                     name="category"
-                    component={this.renderField}
+                    component={this.renderField.bind(this)}
                 />
                 <Field 
                     label="Body"
                     type="textarea"
                     name="body"
-                    component={this.renderField}
+                    component={this.renderField.bind(this)}
                 />
                 <button className="submitButton" type="submit">Submit</button>
                 <Link to='/'><p className="cancelButton">Back to Home</p></Link>
@@ -80,9 +85,13 @@ const validate = (vals) => {
     return errors;
 }
 
+function mapStateToProps( { posts } ) {
+    return { post: posts };
+}
+
 export default reduxForm({
     validate,
     form: 'PostNewForm'
 })(
-    withRouter(connect(null, { createPost })(PostNew))
+    withRouter(connect(mapStateToProps, { createPost })(PostNew))
 )

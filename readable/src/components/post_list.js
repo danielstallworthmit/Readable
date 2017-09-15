@@ -7,6 +7,7 @@ import { sortPosts } from '../actions';
 
 import Voter from './voter';
 import CommentList from './comment_list';
+import EditDelete from './edit_delete';
 
 class PostList extends React.Component {
     static PropTypes = {
@@ -67,6 +68,7 @@ class PostList extends React.Component {
                                     } </span> </p>
                                 <p> {_.size(post.comments)} Comments </p>
                             </div>
+                            <EditDelete post={post} />
                         </div>
                         { match.params.hasOwnProperty("post_id") ?
                             <CommentList post={post} />

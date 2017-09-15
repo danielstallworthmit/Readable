@@ -46,9 +46,12 @@ export default function( state={}, action ) {
         //             category
         //         }
         //     }
+        case acts.PRE_UPDATE_POST:
+            console.log(payload);
+            return { ...payload, update: 'yes' };
         case acts.REMOVE_POST:
             // return _.omit(state, payload)
-            return { ...state, [payload]: { ...state[payload], deleted: true } };
+            return { ...state, [payload.id]: { ...state[payload.id], deleted: true } };
             // return {
             //     ...state,
             //     [id]: {
