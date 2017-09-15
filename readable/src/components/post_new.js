@@ -8,8 +8,8 @@ class PostNew extends React.Component {
     renderField(field) {
         const { meta: { touched, error } } = field;
         return (
-            <div>
-                <label>{field.label}</label>
+            <div className="formInput">
+                <label htmlFor={field.name}>{field.label}</label>
                 {field.type === 'text' ?
                     <input type='text' {...field.input} />
                     :
@@ -57,7 +57,7 @@ class PostNew extends React.Component {
                     component={this.renderField}
                 />
                 <button className="submitButton" type="submit">Submit</button>
-                <Link to='/' className="cancelButton">Cancel</Link>
+                <Link to='/'><p className="cancelButton">Back to Home</p></Link>
             </form>
         )
     }
