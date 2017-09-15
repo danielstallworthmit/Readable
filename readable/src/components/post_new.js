@@ -41,25 +41,25 @@ class PostNew extends React.Component {
                     label="Title"
                     type="text"
                     name="title"
-                    component={this.renderField.bind(this)}
+                    component={this.renderField}
                 />
                 <Field 
                     label="Author"
                     type="text"
                     name="author"
-                    component={this.renderField.bind(this)}
+                    component={this.renderField}
                 />
                 <Field 
                     label="Category"
                     type="text"
                     name="category"
-                    component={this.renderField.bind(this)}
+                    component={this.renderField}
                 />
                 <Field 
                     label="Body"
                     type="textarea"
                     name="body"
-                    component={this.renderField.bind(this)}
+                    component={this.renderField}
                 />
                 <button className="submitButton" type="submit">Submit</button>
                 <Link to='/'><p className="cancelButton">Back to Home</p></Link>

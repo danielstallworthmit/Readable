@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { preUpdatePost, removePost } from '../actions';
+import { preUpdatePost, removePost, fetchPosts } from '../actions';
 
 class EditDelete extends React.Component {
     editHandler() {
@@ -12,9 +12,15 @@ class EditDelete extends React.Component {
 
     deleteHandler() {
         console.log(this.props)
-        this.props.removePost(this.props.post)
+        this.props.removePost(this.props.post, () => {
+            this.props.fetchPosts();
+        })
+        // setTimeout(() => {
+        //     this.props.fetchPosts();
+        // }, 500)
         this.props.history.push('/');
     }
+
     render() {
         // const { post } = this.props;
         return (
@@ -26,4 +32,4 @@ class EditDelete extends React.Component {
     }
 }
 
-export default withRouter(connect(null, { preUpdatePost, removePost })(EditDelete));
+export default withRouter(connect(null, { preUpdatePost, removePost, fetchPosts })(EditDelete));

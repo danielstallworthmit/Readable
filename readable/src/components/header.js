@@ -5,7 +5,7 @@ import { fetchPosts } from '../actions';
 
 class Header extends React.Component {
     postRender() {
-        this.props.fetchPost(this.props.match.params.post_id);
+        this.props.fetchPosts();
     }
 
     render() {

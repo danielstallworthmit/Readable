@@ -39,7 +39,7 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 
 // Post Action Creators
-export const fetchPosts = (callback) => {
+export const fetchPosts = () => {
     console.log('fetching posts!')
     const posts = fetch(`${api}/posts`, { headers })
         .then(res => res.json())
@@ -116,11 +116,17 @@ export const updatePost = ( post, callback ) => {
     }
 }
 
-export const removePost = ( post ) => {
-    const postreq = fetch(`${api}/posts/${post.id}`, { method: 'DELETE', headers })
-        .then(res => res.json())
+export const removePost = ( post, callback ) => {
+    const postreq = fetch(`${api}/posts/${post.id}`, { 
+        method: 'DELETE', 
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(post) 
+    }).then(res => res.json())
         // .then(data => data.post)
-        // .then(() => callback())
+        .then(() => callback())
     return {
         type: REMOVE_POST,
         payload: post
