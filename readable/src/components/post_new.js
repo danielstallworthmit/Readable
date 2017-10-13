@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createPost } from '../actions'; 
+import { createPost, updatePost } from '../actions'; 
 
 class PostNew extends React.Component {
     componentDidMount() {
@@ -28,10 +28,16 @@ class PostNew extends React.Component {
     }
 
     onSubmit(entity) {
-        console.log(entity);
-        this.props.createPost(entity, () => {
-            this.props.history.push(`/${entity.category}/${entity.id}`);
-        })
+        // console.log(entity);
+        if (this.props.post.hasOwnProperty('update')) {
+            this.props.updatePost(entity, () => {
+                this.props.history.push(`/${entity.category}/${entity.id}`);
+            })
+        } else {
+            this.props.createPost(entity, () => {
+                this.props.history.push(`/${entity.category}/${entity.id}`);
+            })
+        }
     } 
     render() {
         const { handleSubmit } = this.props;
@@ -93,5 +99,5 @@ export default reduxForm({
     validate,
     form: 'PostNewForm'
 })(
-    withRouter(connect(mapStateToProps, { createPost })(PostNew))
+    withRouter(connect(mapStateToProps, { createPost, updatePost })(PostNew))
 )
