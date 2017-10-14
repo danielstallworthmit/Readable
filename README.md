@@ -1,11 +1,16 @@
 # Readable
 
 Readable is a project for writing posts and commenting on posts.<br>
-Each post is organized within categories.
+Each post is organized within categories.<br>
+The server is located at [https://github.com/udacity/reactnd-project-readable-starter](https://github.com/udacity/reactnd-project-readable-starter).
 
 ## Installation
 
-Clone Repo and run the command below to get set up.
+Clone Repo and server, start the server by running the following commands:<br>
+`cd api-server`<br>
+`npm install`<br>
+`node server`<br>
+Then run the command below in the Readable directory to get set up.
 
 ### `npm install`
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { votePost, voteComment } from '../actions';
 
@@ -21,7 +20,7 @@ class Voter extends React.Component {
     }
 
     render() {
-        const { entity, votePost } = this.props;
+        const { entity } = this.props;
         return (
             <div className="voteCell">
                 <img className="upClick" onClick={this.upClick} src="http://www.freeiconspng.com/uploads/up-arrow-png-17.png" alt="voteUp" />

@@ -1,51 +1,48 @@
 import { uuidv4 } from '../utils/helpers';
-const api = 'http://localhost:3001'
+const api = 'http://localhost:3001';
 
-let token = localStorage.token
+let token = localStorage.token;
 
 if (!token)
-    token = localStorage.token = Math.random().toString(36).substr(-8)
+    token = localStorage.token = Math.random().toString(36).substr(-8);
 
 const headers = {
     'Accept': 'application/json',
     'Authorization': token
-}
+};
 
 // POSTS
 // Fetch, create, update, remove posts
-export const FETCH_POSTS = 'FETCH_POSTS'
-export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS'
-export const FETCH_POST = 'FETCH_POST'
-export const CREATE_POST = 'CREATE_POST'
-export const UPDATE_POST = 'UPDATE_POST'
-export const PRE_UPDATE_POST = 'PRE_UPDATE_POST'
-export const REMOVE_POST = 'REMOVE_POST'
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS';
+export const FETCH_POST = 'FETCH_POST';
+export const CREATE_POST = 'CREATE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
+export const PRE_UPDATE_POST = 'PRE_UPDATE_POST';
+export const REMOVE_POST = 'REMOVE_POST';
 // Increment and decrement post score through option variable
-export const VOTE_POST = 'VOTE_POST'
+export const VOTE_POST = 'VOTE_POST';
 // Sort posts by date or score
-export const SORT_POSTS = 'SORT_POSTS'
-export const SORT_POSTS_SCORE = 'SORT_POSTS_SCORE'
+export const SORT_POSTS = 'SORT_POSTS';
+export const SORT_POSTS_SCORE = 'SORT_POSTS_SCORE';
 
 // COMMENTS
 // Fetch, create, update, remove comments
-export const FETCH_COMMENTS = 'FETCH_COMMENTS'
-export const CREATE_COMMENT = 'CREATE_COMMENT'
-export const PRE_UPDATE_COMMENT = 'PRE_UPDATE_COMMENT'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const REMOVE_COMMENT = 'REMOVE_COMMENT'
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const PRE_UPDATE_COMMENT = 'PRE_UPDATE_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 // Increment and decrement comment score through option variable
-export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const VOTE_COMMENT = 'VOTE_COMMENT';
 
 
 
 
 // Post Action Creators
 export const fetchPosts = () => {
-    console.log('fetching posts!')
     const posts = fetch(`${api}/posts`, { headers })
         .then(res => res.json())
-        // .then(() => callback())
-        // .then(data => data.posts)
     return {
         type: FETCH_POSTS,
         payload: posts
@@ -55,7 +52,6 @@ export const fetchPosts = () => {
 export const fetchCategoryPosts = ( category ) => {
     const posts = fetch(`${api}/${category}/posts`, { headers })
         .then(res => res.json())
-        // .then(data => data.posts)
     return {
         type: FETCH_CATEGORY_POSTS,
         payload: posts
@@ -65,7 +61,6 @@ export const fetchCategoryPosts = ( category ) => {
 export const fetchPost = ( id ) => {
     const post = fetch(`${api}/posts/${id}`,{ headers })
         .then(res => res.json())
-        // .then(data => data.post)
     return {
         type: FETCH_POST,
         payload: post
@@ -75,8 +70,6 @@ export const fetchPost = ( id ) => {
 export const createPost = ( post, callback ) => {
     post.id = uuidv4();
     post.timestamp = Date.now();
-    // post.voteScore = 0;
-    // post.deleted = false;
     const postreq = fetch(`${api}/posts`, {
             method: 'POST',
             headers: {
@@ -89,7 +82,6 @@ export const createPost = ( post, callback ) => {
     return {
         type: CREATE_POST,
         payload: postreq
-        // title, body, author, category
     }
 }
 
@@ -113,7 +105,6 @@ export const updatePost = ( post, callback ) => {
     return {
         type: UPDATE_POST,
         payload: postreq
-        // title, body, author, category
     }
 }
 
@@ -126,7 +117,6 @@ export const removePost = ( post, callback ) => {
         },
         body: JSON.stringify(post) 
     }).then(res => res.json())
-        // .then(data => data.post)
         .then(() => callback())
     return {
         type: REMOVE_POST,
@@ -136,7 +126,7 @@ export const removePost = ( post, callback ) => {
 
 // Increment/Decrement Vote Post Action Creators
 export const votePost = ( post, option ) => {
-    post.option = option
+    post.option = option;
     const postreq = fetch(`${api}/posts/${post.id}`,{
             method: 'POST',
             headers: {
@@ -148,7 +138,6 @@ export const votePost = ( post, option ) => {
     return {
         type: VOTE_POST,
         payload: postreq
-        // id, voteScore
     }
 }
 
@@ -168,11 +157,9 @@ export const sortPosts = (sorter) => {
 export const fetchComments = ( postid ) => {
     const comments = fetch(`${api}/posts/${postid}/comments`, { headers })
         .then(res => res.json())
-        // .then(data => data.comments)
     return {
         type: FETCH_COMMENTS,
         payload: comments 
-        // postid
     }
 }
 
@@ -214,14 +201,12 @@ export const updateComment = ( comment, callback ) => {
     return {
         type: UPDATE_COMMENT,
         payload: commentreq
-        // id, body, author
     }
 }
 
 export const removeComment = ( comment ) => {
     const commentreq = fetch(`${api}/comments/${comment.id}`, { method: 'DELETE', headers })
         .then(res => res.json())
-        // .then(data => data.comment)
     return {
         type: REMOVE_COMMENT,
         payload: commentreq
@@ -230,7 +215,7 @@ export const removeComment = ( comment ) => {
 
 // Increment/Decrement Comment Action Creators
 export const voteComment = ( comment, option ) => {
-    comment.option = option
+    comment.option = option;
     const commentreq = fetch(`${api}/comments/${comment.id}`, {
             method: 'POST',
             headers: {

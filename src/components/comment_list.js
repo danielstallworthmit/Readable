@@ -8,7 +8,7 @@ import Voter from './voter';
 
 class CommentList extends React.Component {
     render() {
-        const { post, voteComment } = this.props;
+        const { post } = this.props;
         return (
             <ul className="entityList">
                 {_.map(post.comments, comment => (

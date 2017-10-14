@@ -55,13 +55,11 @@ img {
 }
 
 .categoryList {
-  /* float: left; */
   min-width: 200px;
   font-size: 30px;
 }
 
 .entityList {
-  /* display: inline-block; */
   flex-grow: 1;
   margin: 0;
   min-width: 90%;
@@ -72,7 +70,6 @@ img {
 }
 
 .entityItem {
-  /* display: inline-block; */
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -98,12 +95,8 @@ img {
 }
 
 form {
-  /* display: flex;
-  flex-flow: row wrap; */
   margin: auto;
   padding: 20px;
-  /* border: 3px solid lightgreen; */
-  /* background-color: #D4D2D2; */
   border-radius: 4px;
   align-items: center;
   min-width: 300px;
@@ -113,8 +106,6 @@ form {
 label {
   float: left;
   padding: 12px;
-  /* margin: 8px; */
-  /* flex: 1 0 220px; */
 }
 
 .formInput {
@@ -122,19 +113,12 @@ label {
 }
 
 input, textarea {
-  /* display: inline-block; */
-  /* flex-grow: 2; */
-  /* flex-shrink: 0;
-  flex-basis: 100%; */
-  /* flex: 1 0 220px; */
-  /* min-width: 220px; */
   font-size: 1em;
   min-width: 100%;
   padding: 12px;
   margin: 8px;
   border-radius: 4px;
   box-sizing: border-box;
-  /* max-width: 220px; */
 }
 
 .submitButton {

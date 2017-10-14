@@ -16,11 +16,11 @@ class PostList extends React.Component {
     }
 
     handleChange = (event) => {
-        console.log(event.target.value)
+        // Sort posts by selector
         if (event.target.value !== "none") {
             this.props.sortPosts(event.target.value);
         }
-        event.target.value = "none"
+        event.target.value = "none";
     }
 
     postRender() {
@@ -28,8 +28,7 @@ class PostList extends React.Component {
     }
     
     render() {
-        const { posts, sortPosts, match } = this.props;
-        console.log(posts)
+        const { posts, match } = this.props;
         return (
             <ul className="entityList">
                 <select className="sorter" onClick={this.handleChange} defaultValue="none">

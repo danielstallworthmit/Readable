@@ -7,11 +7,8 @@ import _ from 'lodash';
 
 class CommentNew extends React.Component {
     componentDidMount() {
-        console.log(this.props)
-        console.log(this.props.comment);
-        // if (this.props.post.hasOwnProperty('commentToUpdate')) {
+        // When making an edit instead of creating a new comment populate with current comment values
         this.props.initialize(this.props.comment);
-        // }
     }
     renderField(field) {
         const { meta: { touched, error } } = field;
@@ -31,10 +28,11 @@ class CommentNew extends React.Component {
     }
 
     onSubmit(entity) {
+        // Need to save comment with parentID. 
+        // If editing comment take the current id as well to know what comment you need to edit
         const parentId = _.keys(this.props.post)[0];
         const commentPost = this.props.post[parentId];
         entity.parentId = parentId;
-        console.log(commentPost);
         if (this.props.comment) {
             entity.id = this.props.comment.id;
             this.props.updateComment(entity, () => {

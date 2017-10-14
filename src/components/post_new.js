@@ -6,6 +6,7 @@ import { createPost, updatePost } from '../actions';
 
 class PostNew extends React.Component {
     componentDidMount() {
+        // When making an edit instead of creating a new post populate with current post values
         if (this.props.post.hasOwnProperty('update')) {
             this.props.initialize(this.props.post);
         }
@@ -28,7 +29,6 @@ class PostNew extends React.Component {
     }
 
     onSubmit(entity) {
-        // console.log(entity);
         if (this.props.post.hasOwnProperty('update')) {
             this.props.updatePost(entity, () => {
                 this.props.history.push(`/${entity.category}/${entity.id}`);
