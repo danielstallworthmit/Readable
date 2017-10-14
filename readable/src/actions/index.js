@@ -30,6 +30,7 @@ export const SORT_POSTS_SCORE = 'SORT_POSTS_SCORE'
 // Fetch, create, update, remove comments
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const PRE_UPDATE_COMMENT = 'PRE_UPDATE_COMMENT'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'
 // Increment and decrement comment score through option variable
@@ -179,17 +180,24 @@ export const createComment = ( comment, callback ) => {
     comment.id = uuidv4();
     comment.timestamp = Date.now();
     const commentreq = fetch(`${api}/comments`, {
-            headers: {
-                method: 'POST',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(comment)
-        }).then(res => res.json())
-            .then(() => callback())
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    }).then(res => res.json())
+        .then(() => callback());
     return {
         type: CREATE_COMMENT,
         payload: commentreq
-        // body, author
+    }
+}
+
+export const preUpdateComment = (post) => {
+    return {
+        type: PRE_UPDATE_COMMENT,
+        payload: post
     }
 }
 

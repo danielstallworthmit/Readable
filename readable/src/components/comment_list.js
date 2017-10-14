@@ -25,7 +25,7 @@ class CommentList extends React.Component {
                                 </div>
                                 <div>
                                     <p>By <span className="author"> {comment.author} </span> on <span> {
-                                        new Date(comment.timestamp).getMonth() + '/' +
+                                        new Date(comment.timestamp).getMonth() + 1 + '/' +
                                         new Date(comment.timestamp).getDate() + '/' +
                                         new Date(comment.timestamp).getFullYear()
                                         } </span> </p>

@@ -64,6 +64,7 @@ img {
   /* display: inline-block; */
   flex-grow: 1;
   margin: 0;
+  min-width: 90%
 }
 
 .categoryList, li {
@@ -81,6 +82,7 @@ img {
   display: block;
   flex-grow: 1;
   min-width: 300px;
+  width: 90%
 }
 
 .votes {
@@ -90,7 +92,7 @@ img {
 
 .commentBlock {
   display: flex;
-  min-width: 500px;
+  min-width: 100px;
 }
 
 form {
@@ -150,5 +152,11 @@ input, textarea {
   padding: 10px;
   color: red;
   text-transform: uppercase;
+}
+
+#commentButton {
+  display: block;
+  clear: both;
+  margin: 10px;
 }
 

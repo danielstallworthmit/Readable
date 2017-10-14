@@ -103,6 +103,9 @@ export default function( state={}, action ) {
         //             author
         //         }
         //     }
+        case acts.PRE_UPDATE_COMMENT:
+            // console.log(payload);
+            return { ...payload, commentToUpdate: 'yes' };
         case acts.REMOVE_COMMENT:
             return { ...state, [postid]: { ...state[postid], comments: { ...state[postid].comments, [payload.id]: payload } } };
             // return {

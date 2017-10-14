@@ -62,7 +62,7 @@ class PostList extends React.Component {
                             }
                             <div>
                                 <p>By <span className="author"> {post.author} </span> on <span> {
-                                    new Date(post.timestamp).getMonth() + '/' +
+                                    new Date(post.timestamp).getMonth() + 1 + '/' +
                                     new Date(post.timestamp).getDate() + '/' +
                                     new Date(post.timestamp).getFullYear()
                                     } </span> </p>
@@ -71,7 +71,10 @@ class PostList extends React.Component {
                             <EditDelete post={post} />
                         </div>
                         { match.params.hasOwnProperty("post_id") ?
-                            <CommentList post={post} />
+                            [<Link to={`/comments/new`} id="commentButton">
+                                <button id="addButton">Add a Comment!</button>
+                            </Link>,
+                            <CommentList post={post} /> ]
                             :
                             null
                         }
