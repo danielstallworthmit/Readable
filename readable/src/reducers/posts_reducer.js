@@ -105,9 +105,10 @@ export default function( state={}, action ) {
         //     }
         case acts.PRE_UPDATE_COMMENT:
             // console.log(payload);
-            return { ...payload, commentToUpdate: 'yes' };
+            return { post: state, commentToUpdate: 'yes', comment: payload };
         case acts.REMOVE_COMMENT:
-            return { ...state, [postid]: { ...state[postid], comments: { ...state[postid].comments, [payload.id]: payload } } };
+            return { [payload.parentId]: 
+                { ...state[payload.parentId], comments: filterDeleted({ ...state[payload.parentId].comments, [payload.id]: payload }) } };
             // return {
             //     ...state,
             //     [id]: {

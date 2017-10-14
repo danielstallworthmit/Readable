@@ -194,10 +194,10 @@ export const createComment = ( comment, callback ) => {
     }
 }
 
-export const preUpdateComment = (post) => {
+export const preUpdateComment = (comment) => {
     return {
         type: PRE_UPDATE_COMMENT,
-        payload: post
+        payload: comment
     }
 }
 
@@ -218,14 +218,13 @@ export const updateComment = ( comment, callback ) => {
     }
 }
 
-export const removeComment = ( id, postid ) => {
-    const comment = fetch(`${api}/comments/${id}`, { method: 'DELETE', headers })
+export const removeComment = ( comment ) => {
+    const commentreq = fetch(`${api}/comments/${comment.id}`, { method: 'DELETE', headers })
         .then(res => res.json())
         // .then(data => data.comment)
     return {
         type: REMOVE_COMMENT,
-        payload: comment, 
-        postid
+        payload: commentreq
     }
 }
 

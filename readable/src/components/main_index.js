@@ -40,7 +40,7 @@ class MainIndex extends React.Component {
             <div>
                 <Header />
                 <div id="mainContent">
-                    <Categories cats={_.uniq(_.map(posts, "category"))} />
+                    <Categories cats={_.sortedUniq(_.map(posts, "category"))} />
                     <PostList />
                 </div>
             </div>

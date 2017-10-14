@@ -64,7 +64,7 @@ img {
   /* display: inline-block; */
   flex-grow: 1;
   margin: 0;
-  min-width: 90%
+  min-width: 90%;
 }
 
 .categoryList, li {
@@ -76,13 +76,14 @@ img {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  margin-right: 150px;
 }
 
 .details {
   display: block;
   flex-grow: 1;
   min-width: 300px;
-  width: 90%
+  width: 90%;
 }
 
 .votes {
@@ -93,6 +94,7 @@ img {
 .commentBlock {
   display: flex;
   min-width: 100px;
+  margin-right: 150px;
 }
 
 form {

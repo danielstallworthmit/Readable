@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { voteComment } from '../actions';
+import EditDeleteComment from './edit_delete_comment';
 import _ from 'lodash';
 
 import Voter from './voter';
@@ -32,6 +33,7 @@ class CommentList extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <EditDeleteComment post={this.props.post} comment={comment} />
                     </li>
                 ))}
             </ul>

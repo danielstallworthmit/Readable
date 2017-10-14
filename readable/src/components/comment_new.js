@@ -7,9 +7,11 @@ import _ from 'lodash';
 
 class CommentNew extends React.Component {
     componentDidMount() {
-        if (this.props.post.hasOwnProperty('commentToUpdate')) {
-            this.props.initialize(this.props.post.commentToUpdate);
-        }
+        console.log(this.props)
+        console.log(this.props.comment);
+        // if (this.props.post.hasOwnProperty('commentToUpdate')) {
+        this.props.initialize(this.props.comment);
+        // }
     }
     renderField(field) {
         const { meta: { touched, error } } = field;
@@ -31,18 +33,20 @@ class CommentNew extends React.Component {
     onSubmit(entity) {
         const parentId = _.keys(this.props.post)[0];
         const commentPost = this.props.post[parentId];
+        entity.parentId = parentId;
         console.log(commentPost);
-        if (this.props.post.hasOwnProperty('commentToUpdate')) {
+        if (this.props.comment) {
+            entity.id = this.props.comment.id;
             this.props.updateComment(entity, () => {
                 this.props.history.push(`/${commentPost.category}/${commentPost.id}`);
             })
         } else {
-            entity.parentId = parentId;
             this.props.createComment(entity, () => {
                 this.props.history.push(`/${commentPost.category}/${commentPost.id}`);
             })
         }
     } 
+
     render() {
         const { handleSubmit } = this.props;
         return (
@@ -77,8 +81,13 @@ const validate = (vals) => {
     return errors;
 }
 
-function mapStateToProps( { posts } ) {
-    return { post: posts };
+function mapStateToProps( ret ) {
+    if (ret.posts.comment) {
+        return { comment: ret.posts.comment,
+                 post: ret.posts.post};
+    } else {
+        return { post: ret.posts }
+    }
 }
 
 export default reduxForm({
