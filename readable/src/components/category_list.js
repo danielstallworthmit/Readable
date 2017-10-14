@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchCategoryPosts } from '../actions';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 class CategoryList extends React.Component {
     categoryRender() {
@@ -12,7 +11,7 @@ class CategoryList extends React.Component {
     render() {
         return (
             <ul className="categoryList">
-                   { _.sortedUniq(this.props.cats).map(cat => (
+                   { this.props.cats.map(cat => (
                        <Link key={cat} to={`/${cat}`} onClick={this.categoryRender}>
                             <li>
                                 {cat}
